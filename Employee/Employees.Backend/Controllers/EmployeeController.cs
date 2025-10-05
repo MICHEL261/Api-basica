@@ -1,4 +1,5 @@
 ﻿using Employees.Backend.UnitsOfWork.interfaces;
+using Employees.Shared.DTOs;
 using Employees.Shared.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,17 @@ namespace Orders.Backend.Controllers
             _employeeUnitOfWork = employeeUnit;
         }
 
+        [HttpGet("paginated")]
+        public override async Task<IActionResult> GetAsync([FromQuery] PaginationDTO pagination)
+        {
+            var response = await _employeeUnitOfWork.GetAsync(pagination);
+            if (response.WasSuccess)
+            {
+                return Ok(response.Result);
+            }
+            return BadRequest();
+        }
+
         [HttpGet("search/{text}")]
         public async Task<IActionResult> SearchAsync(string text)
         {
@@ -25,6 +37,7 @@ namespace Orders.Backend.Controllers
 
             return NotFound();
         }
+
     }
 
 
