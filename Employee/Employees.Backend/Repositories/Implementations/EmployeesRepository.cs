@@ -20,6 +20,7 @@ namespace Employees.Backend.Repositories.Implementations
         {
             text = text.ToLower();
 
+
             var result = await _context.Employees
                 .Where(e => e.FirstName.ToLower().Contains(text) || e.LastName.ToLower().Contains(text))
                 .ToListAsync();
