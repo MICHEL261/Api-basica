@@ -1,5 +1,5 @@
-﻿<h3>EmployeeCreate</h3>
-
-@code {
-
-}
+﻿<MudDialog>
+    <DialogContent>
+        <EmployeeForm Employee="Employee" OnValidSubmit="CreateAsync" ReturnAction="Return" />
+    </DialogContent>
+</MudDialog>
