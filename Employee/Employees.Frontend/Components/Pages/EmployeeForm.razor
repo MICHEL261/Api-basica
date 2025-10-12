@@ -16,6 +16,10 @@
                   @bind-Value="@Employee.Salary"
                   For="@(() => Employee.Salary)"
                   Class="mb-4" />
+    <MudTextField Label="activo"
+                  @bind-Value="@Employee.IsActive"
+                  For="@(() => Employee.IsActive)"
+                  Class="mb-4" />
 
     <MudButton Variant="Variant.Outlined"
                StartIcon="@Icons.Material.Filled.ArrowBack"
