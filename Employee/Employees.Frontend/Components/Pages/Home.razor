@@ -1,5 +1,15 @@
 ﻿@page "/"
 
 <PageTitle>Employees</PageTitle>
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        <MudText Typo="Typo.h3" Class="m-2" GutterBottom="true">Hola, @context.User.Identity?.Name</MudText>
+    </Authorized>
+    <NotAuthorized>
+        <MudText Typo="Typo.h3" Class="m-2" GutterBottom="true">eres anonimo</MudText>
+    </NotAuthorized>
+</AuthorizeView>
+
+
 
 <MudText Typo="Typo.h3" GutterBottom="true">Bienvenido a empleados</MudText>
