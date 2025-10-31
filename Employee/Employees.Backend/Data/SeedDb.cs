@@ -2,6 +2,7 @@
 using Employees.Backend.UnitsOfWork.interfaces;
 using Employees.Shared.Entities;
 using Employees.Shared.Enums;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace Employees.Backend.Data
@@ -19,15 +20,26 @@ namespace Employees.Backend.Data
 
         }
 
+
         public async Task SeedAsync()
         {
             await _context.Database.EnsureCreatedAsync();
             await CheckEmployeesAsync();
             await CheckRolesAsync();
             await CheckUserAsync("1010", "Juan", "Zuluaga", "zulu@yopmail.com", "322 311 4620", "Calle Luna Calle Sol", UserType.Admin);
+            await CheckCountriesFullAsync();
 
 
         }
+        private async Task CheckCountriesFullAsync()
+        {
+            if (!_context.Countries.Any())
+            {
+                var countriesSQLScript = File.ReadAllText("Data\\CountriesStatesCities.sql");
+                await _context.Database.ExecuteSqlRawAsync(countriesSQLScript);
+            }
+        }
+
 
         private async Task CheckRolesAsync()
         {
