@@ -1,12 +1,13 @@
 ﻿using Employees.Backend.UnitsOfWork.interfaces;
 using Employees.Shared.DTOs;
 using Employees.Shared.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Orders.Backend.Controllers;
 using System.Diagnostics.Metrics;
 
 namespace Employees.Backend.Controllers;
-
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 [ApiController]
 [Route("api/[controller]")]
 public class StatesController : GenericController<State>
