@@ -2,13 +2,12 @@ using Employees.Frontend.Repositories;
 using Employees.Shared.Entities;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System.Diagnostics.Metrics;
 
-namespace Employees.Frontend.Components.Pages;
+namespace Employees.Frontend.Components.Pages.CountriesPages;
 
-public partial class EmployeeEdit
+public partial class CountryEdit
 {
-    private Employee? Employee;
+    private Country? country;
 
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
     [Inject] private IRepository Repository { get; set; } = null!;
@@ -18,13 +17,13 @@ public partial class EmployeeEdit
 
     protected override async Task OnInitializedAsync()
     {
-        var responseHttp = await Repository.GetAsync<Employee>($"api/Employee/{Id}");
+        var responseHttp = await Repository.GetAsync<Country>($"api/countries/{Id}");
 
         if (responseHttp.Error)
         {
             if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                NavigationManager.NavigateTo("Employee");
+                NavigationManager.NavigateTo("countries");
             }
             else
             {
@@ -34,13 +33,13 @@ public partial class EmployeeEdit
         }
         else
         {
-            Employee = responseHttp.Response;
+            country = responseHttp.Response;
         }
     }
 
     private async Task EditAsync()
     {
-        var responseHttp = await Repository.PutAsync("api/Employee", Employee);
+        var responseHttp = await Repository.PutAsync("api/countries", country);
 
         if (responseHttp.Error)
         {
@@ -55,6 +54,6 @@ public partial class EmployeeEdit
 
     private void Return()
     {
-        NavigationManager.NavigateTo("employees");
+        NavigationManager.NavigateTo("countries");
     }
 }

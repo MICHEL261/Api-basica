@@ -2,21 +2,23 @@ using Employees.Frontend.Repositories;
 using Employees.Shared.Entities;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System.Diagnostics.Metrics;
 
-namespace Employees.Frontend.Components.Pages;
+namespace Employees.Frontend.Components.Pages.StatesPages;
 
-public partial class EmployeeCreate
+public partial class StateCreate
 {
-    private Employee Employee = new();
+    private State state = new();
 
     [Inject] private IRepository Repository { get; set; } = null!;
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
     [Inject] private ISnackbar Snackbar { get; set; } = null!;
 
+    [Parameter] public int CountryId { get; set; }
+
     private async Task CreateAsync()
     {
-        var responseHttp = await Repository.PostAsync("/api/Employee", Employee);
+        state.CountryId = CountryId;
+        var responseHttp = await Repository.PostAsync("/api/states", state);
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
@@ -30,6 +32,6 @@ public partial class EmployeeCreate
 
     private void Return()
     {
-        NavigationManager.NavigateTo("employees");
+        NavigationManager.NavigateTo($"/countries/details/{CountryId}");
     }
 }

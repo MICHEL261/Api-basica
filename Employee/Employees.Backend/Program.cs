@@ -1,5 +1,4 @@
 using Employees.Backend.Data;
-using Employees.Backend.Repositories;
 using Employees.Backend.Repositories.Implementations;
 using Employees.Backend.Repositories.Interfaces;
 using Employees.Backend.UnitsOfWork.Implementations;
