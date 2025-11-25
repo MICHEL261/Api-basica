@@ -37,3 +37,4 @@ public class FileStorage : IFileStorage
         return blob.Uri.ToString();
     }
 }
+
