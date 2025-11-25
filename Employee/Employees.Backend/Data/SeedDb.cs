@@ -24,10 +24,11 @@ namespace Employees.Backend.Data
         public async Task SeedAsync()
         {
             await _context.Database.EnsureCreatedAsync();
+            await CheckCountriesFullAsync();
             await CheckEmployeesAsync();
             await CheckRolesAsync();
             await CheckUserAsync("1010", "Juan", "Zuluaga", "zulu@yopmail.com", "322 311 4620", "Calle Luna Calle Sol", UserType.Admin);
-            await CheckCountriesFullAsync();
+            
 
 
         }
@@ -61,7 +62,7 @@ namespace Employees.Backend.Data
                     PhoneNumber = phone,
                     Address = address,
                     Document = document,
-                   
+                    City = _context.Cities.FirstOrDefault(),
                     UserType = userType,
                 };
 
@@ -71,6 +72,7 @@ namespace Employees.Backend.Data
 
             return user;
         }
+
 
 
         private async Task CheckEmployeesAsync()

@@ -7,6 +7,7 @@ namespace Employees.Backend.Repositories.Interfaces;
 public interface ICountriesRepository
 {
     Task<ActionResponse<Country>> GetAsync(int id);
+    Task<IEnumerable<Country>> GetComboAsync();
 
     Task<ActionResponse<IEnumerable<Country>>> GetAsync();
     Task<ActionResponse<IEnumerable<Country>>> GetAsync(PaginationDTO pagination);

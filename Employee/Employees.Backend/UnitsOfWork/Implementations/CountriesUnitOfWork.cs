@@ -15,6 +15,7 @@ public class CountriesUnitOfWork : GenericUnitOfWork<Country>, ICountriesUnitOfW
     {
         _countriesRepository = countriesRepository;
     }
+    public async Task<IEnumerable<Country>> GetComboAsync() => await _countriesRepository.GetComboAsync();
 
     public override async Task<ActionResponse<IEnumerable<Country>>> GetAsync() => await _countriesRepository.GetAsync();
 
